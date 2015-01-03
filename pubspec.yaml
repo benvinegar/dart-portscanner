@@ -1,0 +1,8 @@
+name: portscanner
+version: 0.0.1
+author: Ben Vinegar
+description: A simple port scanner written in Dart.
+homepage: http://github.com/benvinegar/dart-portscanner
+dependencies:
+  args: any
+  unittest: any
