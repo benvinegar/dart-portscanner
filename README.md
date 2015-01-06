@@ -7,7 +7,7 @@ This is a port scanner written in Dart; it scans a given list of IP and port ran
 Scan a single IP:
 
 ```bash
-dart portscanner -p80,8000-8080 127.0.0.1
+dart bin/portscanner.dart -p80,8000-8080 127.0.0.1
 ```
 
 This will scan 127.0.0.1 for open ports on port 80, and 8000 through 8080.
@@ -15,7 +15,7 @@ This will scan 127.0.0.1 for open ports on port 80, and 8000 through 8080.
 Scan an IP range (using [CIDR notation](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation)):
 
 ```bash
-dart portscanner -p22 10.0.0.0/24
+dart bin/portscanner.dart -p22 10.0.0.0/24
 ```
 
 This will scan IPs from 10.0.0.0 through 10.0.0.255 for an open port 22 (SSH).
