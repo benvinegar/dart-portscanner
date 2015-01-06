@@ -37,6 +37,7 @@ scanIpAndPortRange('10.0.1.0/28', [[22,22]]).then((result) {
 });
 ```
 
+See [API Documentation on pub.dartlang.org](http://www.dartdocs.org/documentation/portscanner/0.0.1/index.html#portscanner/portscanner) for more.
 
 ## FAQ
 
