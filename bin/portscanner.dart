@@ -13,18 +13,10 @@ void main(List<String> args) {
 
   List portRanges = getPortRangesFromArg(result['port']);
 
-  scanIpAndPortRange(ipRangeArg, portRanges).then((List foundPortsByIp) {
-    // Remove IPs where no ports were found
-    //
-    // NOTE: foundPortsByIp is "non-growable", so converting to a new list
-    // before filtering. I'm sure there's a better way to do this.
-
-    var filteredIps = foundPortsByIp.toList()
-        ..removeWhere((List x) => x[1].length == 0);
-
+  scanIpAndPortRange(ipRangeArg, portRanges).then((Map foundPortsByIp) {
     // Print out everything we found.
     // TODO: Format this so it doesn't look god-awful
-    print(filteredIps);
+    print(foundPortsByIp);
   });
 }
 

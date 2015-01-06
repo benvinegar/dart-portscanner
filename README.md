@@ -27,16 +27,16 @@ import 'package:portscanner/portscanner.dart';
 
 // Scan a single IP
 scanPortRange('127.0.0.1', [[0,200]]).then((result) {
-  print(result); // => [127.0.0.1, [22, 111]]
+  print(result); // => [22, 111]
 });
 
 // Scan an IP range (using CIDR notation)
 scanIpAndPortRange('10.0.1.0/28', [[22,22]]).then((result) {
-  print(result); // => [[10.0.1.0, []], [10.0.1.1, [22]], ... [10.0.1.15, []]
+  // Only IPs with found ports are returned
+  print(result); // => {10.0.1.3: [22], 10.0.1.8: [22]}
 });
 ```
 
-Yeah, the interface is somewhat cumbersome. I'll be revisiting this.
 
 ## FAQ
 

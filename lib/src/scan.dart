@@ -4,6 +4,9 @@ part of portscanner;
 /// with a list of found open ports at each address
 
 Future scanIpAndPortRange(String ipCidr, List<List<int>> portRanges) {
+
+  // Convert ip string to integer because easier to iterate
+  // through ranges
   List ipRange = ipStringToIntegerRange(ipCidr);
 
   var ipIterable = new Iterable.generate(
@@ -11,11 +14,24 @@ Future scanIpAndPortRange(String ipCidr, List<List<int>> portRanges) {
    (i) => i + ipRange[0]
   );
 
+  Map foundPortsByIp = {};
+
   List<Future> scanFutures = ipIterable.map((int ip) {
-    return scanPortRange(ipIntegerToString(ip), portRanges);
+    String ipString = ipIntegerToString(ip);
+
+    return scanPortRange(ipString, portRanges).then((List foundPorts) {
+      if (foundPorts.length > 0)
+        foundPortsByIp[ipString] = foundPorts;
+    });
+
   }).toList();
 
-  return Future.wait(scanFutures);
+  Completer completer = new Completer();
+  Future.wait(scanFutures).then((List results) {
+    completer.complete(foundPortsByIp);
+  });
+
+  return completer.future;
 }
 
 /// Scans every port at the given ip address, returning a future with a list
@@ -43,7 +59,7 @@ Future scanPortRange(String ip, List<List<int>> portRanges) {
 
   Completer completer = new Completer();
   Future.wait(connectionFutures).then((allSockets) {
-    completer.complete([ip, foundPorts]);
+    completer.complete(foundPorts);
   });
 
   return completer.future;
