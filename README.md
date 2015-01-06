@@ -2,7 +2,7 @@
 
 This is a port scanner written in Dart; it scans a given list of IP and port ranges for open sockets, and reports back.
 
-## Usage
+## Usage (command line)
 
 Scan a single IP:
 
@@ -19,6 +19,24 @@ dart bin/portscanner.dart -p22 10.0.0.0/24
 ```
 
 This will scan IPs from 10.0.0.0 through 10.0.0.255 for an open port 22 (SSH).
+
+## Usage (as Dart package)
+
+```dart
+import 'package:portscanner/portscanner.dart';
+
+// Scan a single IP
+scanPortRange('127.0.0.1', [[0,200]]).then((result) {
+  print(result); // => [127.0.0.1, [22, 111]]
+});
+
+// Scan an IP range (using CIDR notation)
+scanIpAndPortRange('10.0.1.0/28', [[22,22]]).then((result) {
+  print(result); // => [[10.0.1.0, []], [10.0.1.1, [22]], ... [10.0.1.15, []]
+});
+```
+
+Yeah, the interface is somewhat cumbersome. I'll be revisiting this.
 
 ## FAQ
 
