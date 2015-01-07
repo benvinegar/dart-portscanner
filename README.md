@@ -20,6 +20,12 @@ dart bin/portscanner.dart -p22 10.0.0.0/24
 
 This will scan IPs from 10.0.0.0 through 10.0.0.255 for an open port 22 (SSH).
 
+Scan an IPv6 address:
+
+```bash
+dart bin/portscanner.dart -p3306,5432 ::4a7d:ef80
+```
+
 ## Usage (as Dart package)
 
 ```dart
@@ -43,7 +49,7 @@ See [API Documentation on pub.dartlang.org](http://www.dartdocs.org/documentatio
 
 **Uh, why Dart?**
 
-I wrote this utility as an exercise to help learn Dart and the Dart ecosystem (unit testing, pub, etc). It's probably terrible.
+I wrote this utility as an exercise to help learn Dart and the Dart ecosystem (unit testing, pub, etc). The code I've written is probably terrible.
 
 **Should I actually use this?**
 

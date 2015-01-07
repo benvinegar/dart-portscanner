@@ -17,7 +17,7 @@ Future scanIpAndPortRange(String ipCidr, List<List<int>> portRanges) {
   Map foundPortsByIp = {};
 
   List<Future> scanFutures = ipIterable.map((int ip) {
-    String ipString = ipIntegerToString(ip);
+    String ipString = ipv4IntegerToString(ip);
 
     return scanPortRange(ipString, portRanges).then((List foundPorts) {
       if (foundPorts.length > 0)
