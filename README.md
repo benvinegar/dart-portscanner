@@ -53,8 +53,8 @@ I wrote this utility as an exercise to help learn Dart and the Dart ecosystem (u
 
 **Should I actually use this?**
 
-As a Dart library to help find local open ports? Sure.
+As a Dart library to help find local open ports? Maybe.
 
-As a utility for finding open ports on a LAN? I guess you could.
+For anything else? No. This is because dart:io's `Socket.connect` doesn't accept a timeout argument, falling back to a 2 minute default. This means that any host/port combination that fails to return a response will hold a socket open for 2 minutes, making any non-trivial scan useless. There is an open issue (#[1920](https://code.google.com/p/dart/issues/detail?id=19120)) on the Dart issue tracker.
 
-As a tool for scanning the public internet? Definitely not. Try [masscan](https://github.com/robertdavidgraham/masscan) instead.
+Try [masscan](https://github.com/robertdavidgraham/masscan) instead.
