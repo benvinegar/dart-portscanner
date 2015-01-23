@@ -13,7 +13,8 @@ void main(List<String> args) {
 
   List portRanges = getPortRangesFromArg(result['port']);
 
-  scanIpAndPortRange(ipRangeArg, portRanges).then((Map foundPortsByIp) {
+  Scanner scanner = new Scanner();
+  scanner.scanIpAndPortRange(ipRangeArg, portRanges).then((Map foundPortsByIp) {
     // Print out everything we found.
     // TODO: Format this so it doesn't look god-awful
     print(foundPortsByIp);

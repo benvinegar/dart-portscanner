@@ -32,12 +32,13 @@ dart bin/portscanner.dart -p3306,5432 ::4a7d:ef80
 import 'package:portscanner/portscanner.dart';
 
 // Scan a single IP
-scanPortRange('127.0.0.1', [[0,200]]).then((result) {
+var scanner = new Scanner();
+scanner.scanPortRange('127.0.0.1', [[0,200]]).then((result) {
   print(result); // => [22, 111]
 });
 
 // Scan an IP range (using CIDR notation)
-scanIpAndPortRange('10.0.1.0/28', [[22,22]]).then((result) {
+scanner.scanIpAndPortRange('10.0.1.0/28', [[22,22]]).then((result) {
   // Only IPs with found ports are returned
   print(result); // => {10.0.1.3: [22], 10.0.1.8: [22]}
 });

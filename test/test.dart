@@ -5,6 +5,13 @@ import '../lib/portscanner.dart';
 import '../bin/portscanner.dart';
 
 import 'dart:io';
+import 'dart:async';
+
+class ScannerWithMockedScanPortRange extends Scanner {
+  Future scanPortRange(String ip, List<List<int>> portRanges) {
+    return new Future (() => [22, 22]);
+  }
+}
 
 void main() {
   group('lib', () {
@@ -63,6 +70,20 @@ void main() {
     });
   });
 
+  group('Scanner', () {
+    test('scanIpAndPortRange', () {
+      Scanner scanner = new ScannerWithMockedScanPortRange();
+
+      scanner.scanIpAndPortRange('127.0.0.1/32', [[22,22]]).then(expectAsync((Map foundPorts) {
+        // note: scanIpAndPortRange returns [22,22] ... We are really testing whether
+        // this is mapped correctly afterwards / futures are resolved / very basic code coverage,
+        // etc.
+
+        expect(foundPorts, {'127.0.0.1': [22, 22]});
+      }));
+    });
+  });
+  
   group('bin', () {
     test('getPortRangesFromArg', () {
       expect(getPortRangesFromArg('80'), [[80, 80]]);
